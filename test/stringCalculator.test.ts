@@ -14,3 +14,12 @@ test('returns sum for two comma-separated numbers', () => {
     expect(add("4,5")).toBe(9);
 });
 
+test('handles new line as a separator', () => {
+    expect(add("1\n2,3")).toBe(6);
+});
+
+test('supports different delimiters', () => {
+    expect(add("//;\n1;2")).toBe(3);
+    expect(add("//|\n2|3|4")).toBe(9);
+});
+
