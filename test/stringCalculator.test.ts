@@ -28,4 +28,17 @@ test('throws an exception for negative numbers', () => {
     expect(() => add("-1,-2")).toThrow("Negative numbers not allowed: -1, -2");
 });
 
+test('handles multiple delimiters', () => {
+    expect(add("//[***]\n1***2***3")).toBe(6);
+    expect(add("//[%%]\n2%%3%%4")).toBe(9);
+});
 
+test('handles multiple delimiters of various lengths', () => {
+    expect(add("//[*][%]\n1*2%3")).toBe(6);
+    expect(add("//[###][!!]\n2###3!!4")).toBe(9);
+});
+
+test('ignores numbers greater than 1000', () => {
+    expect(add("2,1001")).toBe(2);
+    expect(add("1000,1001,5")).toBe(1005);
+});
